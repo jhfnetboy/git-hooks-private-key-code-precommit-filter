@@ -1,4 +1,4 @@
-# 🔒 Git Hooks Security - 私钥检测工具
+# 🔒 LeakShield - 私钥检测工具
 
 这是一个用于检测和防止提交私钥、API keys 和其他敏感信息的工具集。
 
@@ -6,7 +6,7 @@
 
 ✅ **自动检测多种敏感信息：**
 - Ethereum 私钥 (0x + 64位十六进制)
-- PEM 格式私钥 (BEGIN PRIVATE KEY)
+- PEM 格式私钥 (BEGIN ... PRIVATE KEY)
 - AWS Access Keys (AKIA...)
 - AWS Secret Keys
 - 其他带有实际值的私钥
@@ -98,16 +98,16 @@ git commit --no-verify -m "message"
 
 ```javascript
 // ❌ 实际的 Ethereum 私钥
-const PRIVATE_KEY = "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
+const PRIVATE_KEY = "0x..."; // YOUR_PRIVATE_KEY
 
 // ❌ PEM 格式私钥
------BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
------END PRIVATE KEY-----
+-----BEGIN PRIVATE KEY (EXAMPLE)-----
+...
+-----END PRIVATE KEY (EXAMPLE)-----
 
 // ❌ AWS 密钥
-const AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
-const AWS_SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+const AWS_ACCESS_KEY = "AKIA...";
+const AWS_SECRET_KEY = "wJalr...";
 ```
 
 ### ✅ 允许的内容：

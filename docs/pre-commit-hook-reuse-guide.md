@@ -134,7 +134,7 @@ jobs:
           
           # 检测模式
           ETHEREUM_KEY_PATTERN='0x[a-fA-F0-9]{64}'
-          PEM_PATTERN='BEGIN.*PRIVATE KEY'
+          PEM_PATTERN='BEGIN''.*''PRIVATE KEY'
           AWS_ACCESS_PATTERN='AKIA[0-9A-Z]{16}'
           PRIVATE_KEY_WITH_VALUE_PATTERN='private[_-]key[[:space:]]*[:=][[:space:]]*0x[a-fA-F0-9]{32,}'
           
@@ -358,7 +358,7 @@ GitHub Actions will also scan all PRs and commits to the main branch.
 {
   "patterns": {
     "ethereum_key": "0x[a-fA-F0-9]{64}",
-    "pem_key": "BEGIN.*PRIVATE KEY",
+    "pem_key": "BEGIN.*PRIVATE\\sKEY",
     "aws_access": "AKIA[0-9A-Z]{16}",
     "custom_api_key": "sk-[a-zA-Z0-9]{48}"
   },

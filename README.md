@@ -1,4 +1,4 @@
-# 🛡️ Git Hooks - Private Key & API Key Filter
+# 🛡️ LeakShield - Private Key & API Key Filter
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 [![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
-[![Security](https://img.shields.io/badge/Security-Hardened-success?style=for-the-badge&logo=security&logoColor=white)](https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter)
+[![Security](https://img.shields.io/badge/Security-Hardened-success?style=for-the-badge&logo=security&logoColor=white)](https://github.com/jhfnetboy/LeakShield)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 
 [English](#english) | [中文](#chinese)
@@ -28,7 +28,7 @@ A powerful Git pre-commit hook and GitHub Actions workflow designed to automatic
 
 - **Blockchain Private Keys**
   - ✅ Ethereum Private Keys (0x + 64 hex characters)
-  - ✅ PEM Format Private Keys (BEGIN PRIVATE KEY)
+  - ✅ PEM Format Private Keys (BEGIN ... PRIVATE KEY)
 
 - **Cloud Service Keys**
   - ✅ AWS Access Keys (AKIA...)
@@ -67,24 +67,24 @@ A powerful Git pre-commit hook and GitHub Actions workflow designed to automatic
 Run this command in your project root:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/LeakShield/main/scripts/install-hooks.sh)"
 ```
 
 #### Method 2: Clone & Install
 
 ```bash
 # Clone this repository
-git clone https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git
+git clone https://github.com/jhfnetboy/LeakShield.git
 
 # Run the deployment script
-./git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh /path/to/your/project
+./LeakShield/scripts/deploy-to-project.sh /path/to/your/project
 ```
 
 #### Method 3: As Git Submodule
 
 ```bash
 # Add as a submodule
-git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git .githooks
+git submodule add https://github.com/jhfnetboy/LeakShield.git .githooks
 
 # Install hooks
 .githooks/scripts/install-hooks.sh
@@ -103,7 +103,7 @@ git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precom
 
 - **区块链私钥**
   - ✅ Ethereum 私钥 (0x + 64位十六进制)
-  - ✅ PEM 格式私钥 (BEGIN PRIVATE KEY)
+  - ✅ PEM 格式私钥 (BEGIN ... PRIVATE KEY)
 
 - **云服务密钥**
   - ✅ AWS Access Keys (AKIA...)
@@ -142,24 +142,24 @@ git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precom
 在你的项目根目录下运行：
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/LeakShield/main/scripts/install-hooks.sh)"
 ```
 
 #### 方法 2: 克隆安装
 
 ```bash
 # Clone 这个 repository
-git clone https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git
+git clone https://github.com/jhfnetboy/LeakShield.git
 
 # 运行部署脚本
-./git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh /path/to/your/project
+./LeakShield/scripts/deploy-to-project.sh /path/to/your/project
 ```
 
 #### 方法 3: 作为 Git Submodule
 
 ```bash
 # 添加为 submodule
-git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git .githooks
+git submodule add https://github.com/jhfnetboy/LeakShield.git .githooks
 
 # 安装 hooks
 .githooks/scripts/install-hooks.sh

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ##############################################################################
-# Git Hooks Security Installer
+# LeakShield Installer
 # 
 # Install security hooks to the current git repository
 # Usage: 
-#   curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/jhfnetboy/LeakShield/main/scripts/install-hooks.sh | bash
 ##############################################################################
 
 set -e
@@ -16,9 +16,9 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-REPO_URL="https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main"
+REPO_URL="https://raw.githubusercontent.com/jhfnetboy/LeakShield/main"
 
-echo -e "${BLUE}🔒 Git Hooks Security Installer${NC}\n"
+echo -e "${BLUE}🔒 LeakShield Installer${NC}\n"
 
 # Check if inside a git repository
 if [ ! -d ".git" ]; then

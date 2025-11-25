@@ -33,7 +33,7 @@
 我已经为你创建了以下文件：
 
 ```
-7702/
+LeakShield/
 ├── .github/workflows/
 │   └── check-secrets.yml           # GitHub Actions workflow
 ├── scripts/
@@ -95,10 +95,10 @@ mkdir git-hooks-security
 cd git-hooks-security
 
 # 2. 复制文件
-cp -r /path/to/7702/.git/hooks/pre-commit hooks/
-cp -r /path/to/7702/.github/workflows/check-secrets.yml .github/workflows/
-cp /path/to/7702/scripts/install-hooks.sh .
-cp /path/to/7702/docs/GIT_HOOKS_SECURITY_README.md README.md
+cp -r /path/to/LeakShield/.git/hooks/pre-commit hooks/
+cp -r /path/to/LeakShield/.github/workflows/check-secrets.yml .github/workflows/
+cp /path/to/LeakShield/scripts/install-hooks.sh .
+cp /path/to/LeakShield/docs/GIT_HOOKS_SECURITY_README.md README.md
 
 # 3. 推送到 GitHub
 git init
@@ -126,8 +126,8 @@ curl -sSL https://raw.githubusercontent.com/yourusername/git-hooks-security/main
 ### 场景 1: 部署到单个项目
 
 ```bash
-# 在 7702 项目中
-cd /Users/jason/Dev/mycelium/my-exploration/projects/7702
+# 在 LeakShield 项目中
+cd /Users/jason/Dev/mycelium/my-exploration/projects/LeakShield
 
 # 部署到另一个项目
 ./scripts/deploy-to-project.sh ~/projects/another-web3-project
@@ -171,7 +171,7 @@ cd my-new-project
 git init
 
 # 2. 部署安全检查
-/path/to/7702/scripts/deploy-to-project.sh .
+/path/to/LeakShield/scripts/deploy-to-project.sh .
 
 # 3. 开始开发
 # 现在所有 commits 都会被检查！
@@ -185,19 +185,19 @@ git init
 
 ```javascript
 // ❌ Ethereum 私钥
-PRIVATE_KEY=0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+PRIVATE_KEY=0x...
 
 // ❌ PEM 私钥
------BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASC...
------END PRIVATE KEY-----
+-----BEGIN PRIVATE KEY (EXAMPLE)-----
+...
+-----END PRIVATE KEY (EXAMPLE)-----
 
 // ❌ AWS 密钥
-AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
-AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS_ACCESS_KEY_ID=AKIA...
+AWS_SECRET_ACCESS_KEY=wJalr...
 
 // ❌ API Keys
-API_KEY="sk-1234567890abcdefghijklmnopqrstuvwxyz123456"
+API_KEY="sk-..."
 ```
 
 ### ✅ 不会误报的内容
