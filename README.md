@@ -3,7 +3,7 @@
 <div align="center">
 
 <!-- Placeholder for Logo -->
-<!-- <img src="docs/images/logo.png" alt="Git Hooks Security Logo" width="200"/> -->
+<img src="docs/logo.png" alt="LeakShield" width="200"/>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
