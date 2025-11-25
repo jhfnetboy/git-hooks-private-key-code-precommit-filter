@@ -1,10 +1,11 @@
 #!/bin/bash
 
 ##############################################################################
-# Git Hooks Installer
+# Git Hooks Security Installer
 # 
-# 这个脚本将安全检查 hooks 安装到当前 git repository
-# 使用方法：./install-hooks.sh
+# Install security hooks to the current git repository
+# Usage: 
+#   curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh | bash
 ##############################################################################
 
 set -e
@@ -15,61 +16,97 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-HOOKS_DIR="$PROJECT_ROOT/.git/hooks"
+REPO_URL="https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main"
 
 echo -e "${BLUE}🔒 Git Hooks Security Installer${NC}\n"
 
-# 检查是否在 git repository 中
-if [ ! -d "$PROJECT_ROOT/.git" ]; then
+# Check if inside a git repository
+if [ ! -d ".git" ]; then
     echo -e "${RED}❌ Error: Not a git repository${NC}"
-    echo -e "${YELLOW}Please run this script from within a git repository${NC}"
+    echo -e "${YELLOW}Please run this script from the root of your git repository${NC}"
     exit 1
 fi
 
-echo -e "${BLUE}📦 Installing security hooks...${NC}\n"
+HOOKS_DIR=".git/hooks"
+WORKFLOW_DIR=".github/workflows"
 
-# 备份现有的 pre-commit hook（如果存在）
+echo -e "${BLUE}📦 Installing security components...${NC}\n"
+
+# 1. Install Pre-commit Hook
+echo -e "1️⃣  Installing pre-commit hook..."
+
+# Backup existing hook
 if [ -f "$HOOKS_DIR/pre-commit" ]; then
     BACKUP_FILE="$HOOKS_DIR/pre-commit.backup.$(date +%Y%m%d_%H%M%S)"
-    echo -e "${YELLOW}⚠️  Existing pre-commit hook found${NC}"
-    echo -e "${YELLOW}   Backing up to: ${BACKUP_FILE}${NC}\n"
+    echo -e "${YELLOW}   ⚠️  Backing up existing hook to: $(basename $BACKUP_FILE)${NC}"
     cp "$HOOKS_DIR/pre-commit" "$BACKUP_FILE"
 fi
 
-# 复制 pre-commit hook
-if [ -f "$PROJECT_ROOT/.git/hooks/pre-commit" ]; then
-    # 如果当前项目已经有 pre-commit，使用它
-    echo -e "${GREEN}✅ Using existing pre-commit hook from current project${NC}"
-elif [ -f "$SCRIPT_DIR/../.githooks/pre-commit" ]; then
-    # 从 .githooks 目录复制
-    cp "$SCRIPT_DIR/../.githooks/pre-commit" "$HOOKS_DIR/pre-commit"
-    echo -e "${GREEN}✅ Copied pre-commit hook from .githooks${NC}"
-else
-    echo -e "${RED}❌ Error: pre-commit hook not found${NC}"
-    echo -e "${YELLOW}Please ensure the hook file exists${NC}"
-    exit 1
+# Download hook
+curl -fsSL "$REPO_URL/hooks/pre-commit" -o "$HOOKS_DIR/pre-commit"
+chmod +x "$HOOKS_DIR/pre-commit"
+echo -e "${GREEN}   ✅ Pre-commit hook installed${NC}\n"
+
+# 2. Install GitHub Actions Workflow
+echo -e "2️⃣  Installing GitHub Actions workflow..."
+
+mkdir -p "$WORKFLOW_DIR"
+WORKFLOW_FILE="$WORKFLOW_DIR/check-secrets.yml"
+
+# Backup existing workflow
+if [ -f "$WORKFLOW_FILE" ]; then
+    BACKUP_WORKFLOW="$WORKFLOW_FILE.backup.$(date +%Y%m%d_%H%M%S)"
+    echo -e "${YELLOW}   ⚠️  Backing up existing workflow to: $(basename $BACKUP_WORKFLOW)${NC}"
+    cp "$WORKFLOW_FILE" "$BACKUP_WORKFLOW"
 fi
 
-# 确保 hook 可执行
-chmod +x "$HOOKS_DIR/pre-commit"
+# Download workflow
+curl -fsSL "$REPO_URL/.github/workflows/check-secrets.yml" -o "$WORKFLOW_FILE"
+echo -e "${GREEN}   ✅ GitHub Actions workflow installed${NC}\n"
 
-echo -e "\n${GREEN}========================================${NC}"
-echo -e "${GREEN}✅ Security hooks installed successfully!${NC}"
+# 3. Setup Environment
+echo -e "3️⃣  Checking environment configuration..."
+
+# Check .gitignore
+if [ -f ".gitignore" ]; then
+    if ! grep -q "^\.env$" ".gitignore"; then
+        echo -e "${YELLOW}   ⚠️  Adding .env to .gitignore${NC}"
+        echo "" >> ".gitignore"
+        echo "# Environment variables" >> ".gitignore"
+        echo ".env" >> ".gitignore"
+    else
+        echo -e "${GREEN}   ✅ .env is already ignored${NC}"
+    fi
+else
+    echo -e "${YELLOW}   ⚠️  No .gitignore found${NC}"
+fi
+
+# Create .env.example if missing
+if [ ! -f ".env.example" ]; then
+    cat > ".env.example" << 'EOF'
+# Environment Variables Template
+# Copy this file to .env and fill in your values
+# NEVER commit .env file to git!
+
+PRIVATE_KEY=
+API_KEY=
+EOF
+    echo -e "${GREEN}   ✅ Created .env.example template${NC}\n"
+else
+    echo -e "${GREEN}   ✅ .env.example already exists${NC}\n"
+fi
+
+echo -e "${GREEN}========================================${NC}"
+echo -e "${GREEN}🎉 Installation Complete!${NC}"
 echo -e "${GREEN}========================================${NC}\n"
 
-echo -e "${BLUE}🔍 What's protected:${NC}"
-echo -e "  • Ethereum private keys (0x + 64 hex)"
-echo -e "  • PEM format private keys"
-echo -e "  • AWS access/secret keys"
-echo -e "  • Other sensitive credentials\n"
+echo -e "${BLUE}🔍 Protected against:${NC}"
+echo -e "  • Ethereum & PEM Private Keys"
+echo -e "  • AWS, OpenAI, Google, Anthropic Keys"
+echo -e "  • GitHub Tokens & Stripe Keys\n"
 
 echo -e "${BLUE}📝 Next steps:${NC}"
-echo -e "  1. Try committing - hooks will automatically check for secrets"
-echo -e "  2. If you need to bypass (NOT recommended): ${YELLOW}git commit --no-verify${NC}"
-echo -e "  3. Keep your .env files in .gitignore\n"
-
-echo -e "${BLUE}🚀 You're all set!${NC}\n"
+echo -e "  1. Test with: ${GREEN}git commit${NC}"
+echo -e "  2. Push to enable GitHub Actions checks\n"
 
 exit 0
