@@ -62,39 +62,32 @@ A powerful Git pre-commit hook and GitHub Actions workflow designed to automatic
 
 ### 🚀 Quick Start
 
-#### Method 1: One-Click Deployment (Recommended)
+#### Method 1: One-Line Installation (Recommended)
+
+Run this command in your project root:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh)"
+```
+
+#### Method 2: Clone & Install
 
 ```bash
 # Clone this repository
 git clone https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git
 
-# Go to your project directory
-cd /path/to/your/project
-
 # Run the deployment script
-/path/to/git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh .
+./git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh /path/to/your/project
 ```
 
-#### Method 2: As Git Submodule
+#### Method 3: As Git Submodule
 
 ```bash
-# Add as a submodule to your project
+# Add as a submodule
 git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git .githooks
 
-# Run the install script
+# Install hooks
 .githooks/scripts/install-hooks.sh
-```
-
-#### Method 3: Manual Installation
-
-```bash
-# 1. Copy pre-commit hook
-curl -o .git/hooks/pre-commit https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-
-# 2. Copy GitHub Actions workflow
-mkdir -p .github/workflows
-curl -o .github/workflows/check-secrets.yml https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/.github/workflows/check-secrets.yml
 ```
 
 ---
@@ -144,39 +137,32 @@ curl -o .github/workflows/check-secrets.yml https://raw.githubusercontent.com/jh
 
 ### 🚀 快速开始
 
-#### 方法 1: 一键部署（推荐）
+#### 方法 1: 一键安装（推荐）
+
+在你的项目根目录下运行：
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/scripts/install-hooks.sh)"
+```
+
+#### 方法 2: 克隆安装
 
 ```bash
 # Clone 这个 repository
 git clone https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git
 
-# 进入你的项目目录
-cd /path/to/your/project
-
 # 运行部署脚本
-/path/to/git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh .
+./git-hooks-private-key-code-precommit-filter/scripts/deploy-to-project.sh /path/to/your/project
 ```
 
-#### 方法 2: 作为 Git Submodule
+#### 方法 3: 作为 Git Submodule
 
 ```bash
-# 在你的项目中添加为 submodule
+# 添加为 submodule
 git submodule add https://github.com/jhfnetboy/git-hooks-private-key-code-precommit-filter.git .githooks
 
-# 运行安装脚本
+# 安装 hooks
 .githooks/scripts/install-hooks.sh
-```
-
-#### 方法 3: 手动安装
-
-```bash
-# 1. 复制 pre-commit hook
-curl -o .git/hooks/pre-commit https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-
-# 2. 复制 GitHub Actions workflow
-mkdir -p .github/workflows
-curl -o .github/workflows/check-secrets.yml https://raw.githubusercontent.com/jhfnetboy/git-hooks-private-key-code-precommit-filter/main/.github/workflows/check-secrets.yml
 ```
 
 ---
